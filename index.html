@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Yusra 🌸</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd1e8, #fff6fb);
+    overflow-x: hidden;
+}
+
+/* ================= LOCK SCREEN ================= */
+#lockScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffd1e8, #fff6fb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    text-align: center;
+}
+
+.lock-card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 30px 25px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* ================= INTRO GIFT ================= */
+#intro {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffd1e8, #fff6fb);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.gift-box {
+    font-size: 120px;
+    cursor: pointer;
+    animation: bounce 1.5s infinite;
+}
+
+.tap-text {
+    margin-top: 20px;
+    color: #d81b60;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ================= MUSIC ================= */
+#musicBtn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.75);
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+}
+
+/* ================= FLOATING HEARTS ================= */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    color: #ff4d88;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* ================= FALLING PETALS ================= */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 22px;
+    opacity: 0.8;
+    animation: fall 12s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ================= SPARKLES ================= */
+.sparkle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #ff9acb, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkleFade 0.8s forwards;
+}
+
+@keyframes sparkleFade {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(2); opacity: 0; }
+}
+
+/* ================= MAIN CONTENT ================= */
+#main { display: none; }
+
+.container {
+    max-width: 720px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 30px 20px;
+    margin: 25px 0;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    animation: fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: #d81b60;
+    font-size: 2.6rem;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #ff99c8; }
+    to { text-shadow: 0 0 15px #ff4d88; }
+}
+
+h2 { color: #ad1457; }
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+.dua {
+    font-style: italic;
+    color: #555;
+    margin: 14px 0;
+}
+
+/* ================= SIGNATURE ================= */
+.signature {
+    opacity: 0;
+    animation: fadeSig 3s forwards;
+    animation-delay: 2.5s;
+}
+
+@keyframes fadeSig {
+    to { opacity: 1; }
+}
+
+footer {
+    margin: 30px 0;
+    font-size: 0.85rem;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop playsinline preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn">🔇</button>
+
+<!-- 🔒 LOCK SCREEN -->
+<div id="lockScreen">
+    <div class="lock-card">
+        <h2>🔒 Locked</h2>
+        <p id="countdownText">Loading…</p>
+    </div>
+</div>
+
+<!-- 🎁 INTRO -->
+<div id="intro">
+    <div class="gift-box" onclick="openGift()">🎁</div>
+    <div class="tap-text">Tap the gift to open 💖</div>
+</div>
+
+<!-- 🌸 MAIN -->
+<div id="main">
+<div class="container">
+
+<h1>🎉 Happy Birthday Yusra 🌸</h1>
+<p>May your day be filled with peace, love, and beautiful moments.</p>
+
+<div class="card">
+<h2>💖 A Special Message</h2>
+<p>
+Dear Yusra,<br>
+On your birthday, I sincerely pray that Allah fills your life
+with calmness, happiness, and endless blessings.
+</p>
+</div>
+
+<div class="card">
+<h2>🤲 Heartfelt Duas For You</h2>
+<p class="dua">“May Allah grant you a heart full of peace and a life full of barakah.”</p>
+<p class="dua">“May Allah protect you from every hardship and ease your worries.”</p>
+<p class="dua">“May Allah accept your silent prayers and reward you patience.”</p>
+<p class="dua">“May your days be bright, your nights be calm, and your future be beautiful.”</p>
+<p class="dua">“May Allah grant you strong imaan, good health, and success in both worlds.”</p>
+<p class="dua">“May Allah write happiness in your destiny and remove every sorrow.”</p>
+</div>
+
+<div class="card">
+<h2>🌷 A New Chapter</h2>
+<p>
+Another year, another chance for growth and blessings.
+May Allah guide every step you take and keep you under His mercy.
+</p>
+</div>
+
+<div class="card">
+<h2>✨ Always Remember</h2>
+<p>
+You are remembered in duas.<br>
+You are valued more than you know.<br>
+May Allah always keep you smiling.
+</p>
+<p style="font-size:1.4rem;color:#e91e63;">❤</p>
+</div>
+
+<footer>
+Made with respect, duas, and good intentions 🌙<br>
+<span class="signature">— Hamza</span>
+</footer>
+
+</div>
+</div>
+
+<script>
+/* 🔓 UNLOCK ON 10 APRIL 2026 AT 12:00 AM */
+const unlockTime = new Date(2026, 3, 10, 0, 0, 0).getTime();
+
+const lockScreen = document.getElementById("lockScreen");
+const intro = document.getElementById("intro");
+const main = document.getElementById("main");
+const text = document.getElementById("countdownText");
+
+/* MUSIC */
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+function playMusic() {
+    music.volume = 0;
+    music.play().catch(()=>{});
+    btn.style.display = "block";
+    btn.textContent = "🔊";
+
+    let v = 0;
+    const fade = setInterval(() => {
+        if (v < 0.18) {
+            v += 0.01;
+            music.volume = v;
+        } else clearInterval(fade);
+    }, 200);
+}
+
+const timer = setInterval(() => {
+    const diff = unlockTime - Date.now();
+
+    if (diff <= 0) {
+        clearInterval(timer);
+        lockScreen.style.display = "none";
+        intro.style.display = "flex";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+
+    text.innerHTML = `⏳ Unlocks in <b>${days}</b>d <b>${hours}</b>h <b>${mins}</b>m`;
+}, 1000);
+
+function openGift() {
+    intro.style.display = "none";
+    main.style.display = "block";
+    playMusic();
+}
+
+/* HEARTS */
+for (let i = 0; i < 20; i++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDelay = Math.random() * 8 + "s";
+    document.body.appendChild(h);
+}
+
+/* PETALS */
+for (let i = 0; i < 15; i++) {
+    let p = document.createElement("div");
+    p.className = "petal";
+    p.innerHTML = "🌸";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDelay = Math.random() * 10 + "s";
+    document.body.appendChild(p);
+}
+
+/* SPARKLES */
+document.addEventListener("mousemove", e => {
+    let s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = e.clientX + "px";
+    s.style.top = e.clientY + "px";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 800);
+});
+</script>
+
+</body>
+</html>
